@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Harshith Koundinya | Data Analytics Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#080b10;--bg2:#0d1117;--bg3:#111820;--card:#131c27;
+  --border:#1e2d3d;--accent:#00e5ff;--accent2:#7c3aed;--accent3:#f97316;
+  --text:#e2eaf4;--muted:#5a7292;--dim:#2a3f55;--green:#10b981;
+  --font-head:'Syne',sans-serif;--font-mono:'DM Mono',monospace;
+  --font-serif:'Instrument Serif',serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-mono);overflow-x:hidden;cursor:none;}
+
+.cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid var(--accent);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:width .25s,height .25s,opacity .3s;}
+
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.35;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 60px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,11,16,.8);backdrop-filter:blur(16px);border-bottom:1px solid rgba(30,45,61,.4);}
+.nav-logo{font-family:var(--font-head);font-size:18px;font-weight:800;color:var(--accent);}
+.nav-logo span{color:var(--text);}
+.nav-links{display:flex;gap:30px;list-style:none;}
+.nav-links a{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);}
+.nav-cta{font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 20px;border:1.5px solid var(--accent);color:var(--accent);text-decoration:none;border-radius:3px;transition:background .2s,color .2s;}
+.nav-cta:hover{background:var(--accent);color:var(--bg);}
+
+#hero{min-height:100vh;display:flex;align-items:center;padding:120px 60px 80px;position:relative;overflow:hidden;}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.orb1{width:500px;height:500px;background:radial-gradient(circle,rgba(0,229,255,.12) 0%,transparent 70%);top:-100px;right:-100px;animation:orbf 8s ease-in-out infinite;}
+.orb2{width:350px;height:350px;background:radial-gradient(circle,rgba(124,58,237,.1) 0%,transparent 70%);bottom:0;left:100px;animation:orbf 11s ease-in-out infinite reverse;}
+@keyframes orbf{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-40px) scale(1.05);}}
+
+.hero-inner{position:relative;z-index:1;max-width:900px;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:24px;border:1px solid rgba(0,229,255,.25);padding:6px 14px;border-radius:2px;background:rgba(0,229,255,.05);animation:fup .8s ease both;}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pdot 2s ease infinite;}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.7);}}
+.hero-name{font-family:var(--font-head);font-size:clamp(48px,6vw,88px);font-weight:800;line-height:.92;letter-spacing:-3px;margin-bottom:20px;animation:fup .8s .1s ease both;}
+.hero-name .italic{font-family:var(--font-serif);font-style:italic;font-weight:400;color:var(--accent);letter-spacing:-1px;}
+.hero-sub{font-size:13px;color:var(--muted);line-height:1.9;max-width:500px;margin-bottom:32px;animation:fup .8s .2s ease both;}
+.hero-badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;animation:fup .8s .3s ease both;}
+.badge{font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:2px;background:var(--card);border:1px solid var(--border);color:var(--muted);}
+.hero-actions{display:flex;gap:14px;animation:fup .8s .4s ease both;}
+.btn-p{font-family:var(--font-head);font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:13px 28px;background:var(--accent);color:var(--bg);border:none;border-radius:3px;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 0 30px rgba(0,229,255,.3);cursor:pointer;}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(0,229,255,.5);}
+.btn-o{font-family:var(--font-head);font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:13px 28px;background:transparent;color:var(--text);border:1.5px solid var(--border);border-radius:3px;text-decoration:none;transition:border-color .2s,color .2s;}
+.btn-o:hover{border-color:var(--accent);color:var(--accent);}
+
+.scroll-ind{position:absolute;bottom:36px;left:60px;display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);animation:fup .8s .7s ease both;}
+.s-line{width:36px;height:1px;background:var(--muted);position:relative;overflow:hidden;}
+.s-line::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--accent);animation:scan 2s ease infinite;}
+@keyframes scan{to{left:100%;}}
+
+.stats-bar{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:24px 60px;display:flex;justify-content:space-around;align-items:center;position:relative;z-index:1;}
+.stat{text-align:center;}
+.stat-num{font-family:var(--font-head);font-size:32px;font-weight:800;color:var(--accent);line-height:1;}
+.stat-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+.stat-div{width:1px;height:36px;background:var(--border);}
+
+section{padding:90px 60px;position:relative;}
+.s-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:12px;}
+.s-label::before{content:'';width:24px;height:1px;background:var(--accent);}
+.s-title{font-family:var(--font-head);font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:-1.5px;line-height:1;margin-bottom:50px;}
+.s-title em{font-family:var(--font-serif);font-style:italic;font-weight:400;color:var(--accent);}
+
+#about{background:var(--bg2);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start;}
+.about-text p{color:var(--muted);line-height:1.9;font-size:13px;margin-bottom:18px;}
+.about-text p strong{color:var(--text);font-weight:500;}
+.about-details{display:flex;flex-direction:column;gap:12px;margin-top:28px;}
+.about-detail{display:flex;align-items:center;gap:12px;font-size:12px;color:var(--muted);}
+.about-detail .ic{color:var(--accent);min-width:18px;}
+.about-detail a{color:var(--muted);text-decoration:none;transition:color .2s;}
+.about-detail a:hover{color:var(--accent);}
+
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:26px;transition:border-color .3s,transform .3s;position:relative;overflow:hidden;}
+.skill-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);transform:scaleY(0);transform-origin:top;transition:transform .3s;}
+.skill-card:hover{border-color:var(--accent);transform:translateY(-4px);}
+.skill-card:hover::before{transform:scaleY(1);}
+.skill-icon{font-size:26px;margin-bottom:12px;}
+.skill-title{font-family:var(--font-head);font-size:14px;font-weight:700;margin-bottom:14px;}
+.skill-items{display:flex;flex-wrap:wrap;gap:6px;}
+.skill-item{font-size:10px;padding:4px 10px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:2px;color:var(--muted);letter-spacing:.5px;transition:color .2s,border-color .2s;}
+.skill-card:hover .skill-item{border-color:rgba(0,229,255,.2);color:var(--text);}
+
+#projects{background:var(--bg);}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px;}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:30px;transition:border-color .3s,transform .3s;display:flex;flex-direction:column;}
+.proj-card:hover{border-color:var(--accent);transform:translateY(-6px);}
+.proj-num{font-family:var(--font-head);font-size:44px;font-weight:800;color:var(--border);line-height:1;margin-bottom:16px;transition:color .3s;}
+.proj-card:hover .proj-num{color:rgba(0,229,255,.15);}
+.proj-title{font-family:var(--font-head);font-size:17px;font-weight:700;margin-bottom:10px;line-height:1.2;}
+.proj-desc{font-size:11px;color:var(--muted);line-height:1.8;flex:1;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;}
+.proj-tag{font-size:9px;padding:3px 9px;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.3);border-radius:2px;color:#a78bfa;}
+.proj-links{display:flex;gap:12px;margin-top:18px;}
+.proj-link{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:5px;transition:gap .2s;}
+.proj-link:hover{gap:8px;}
+
+#experience{background:var(--bg2);}
+.timeline{position:relative;padding-left:30px;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border);}
+.tl-item{position:relative;margin-bottom:44px;padding-left:28px;}
+.tl-item::before{content:'';position:absolute;left:-35px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);transition:background .3s;}
+.tl-item:hover::before{background:var(--accent);}
+.tl-date{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+.tl-role{font-family:var(--font-head);font-size:19px;font-weight:700;margin-bottom:3px;}
+.tl-company{font-size:12px;color:var(--muted);margin-bottom:14px;}
+.tl-pts{list-style:none;}
+.tl-pts li{font-size:12px;color:var(--muted);line-height:1.8;padding-left:16px;position:relative;margin-bottom:5px;}
+.tl-pts li::before{content:'→';position:absolute;left:0;color:var(--accent);}
+
+#education{background:var(--bg);}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:32px;}
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:30px;transition:border-color .3s;position:relative;overflow:hidden;}
+.edu-card::after{content:'';position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle at top right,rgba(0,229,255,.08),transparent);}
+.edu-card:hover{border-color:var(--accent);}
+.edu-deg{font-family:var(--font-head);font-size:16px;font-weight:700;margin-bottom:7px;line-height:1.3;}
+.edu-sch{font-size:12px;color:var(--accent);margin-bottom:10px;}
+.edu-per{font-size:11px;color:var(--muted);margin-bottom:14px;}
+.edu-list{list-style:none;}
+.edu-list li{font-size:11px;color:var(--muted);padding:4px 0;border-bottom:1px solid rgba(30,45,61,.5);display:flex;align-items:center;gap:8px;}
+.edu-list li::before{content:'◆';font-size:6px;color:var(--accent);}
+.cert-grid{display:flex;flex-wrap:wrap;gap:14px;}
+.cert-badge{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:4px;padding:14px 20px;font-size:12px;color:var(--text);transition:border-color .2s;}
+.cert-badge:hover{border-color:var(--accent);}
+.cert-ic{font-size:20px;}
+
+#contact{background:var(--bg2);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;}
+.contact-info{display:flex;flex-direction:column;gap:16px;}
+.c-item{display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--card);border:1px solid var(--border);border-radius:4px;transition:border-color .2s;text-decoration:none;}
+.c-item:hover{border-color:var(--accent);}
+.c-icon{font-size:18px;color:var(--accent);min-width:22px;}
+.c-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
+.c-val{font-size:13px;color:var(--text);margin-top:2px;}
+.contact-form{display:flex;flex-direction:column;gap:14px;}
+.f-group{display:flex;flex-direction:column;gap:7px;}
+.f-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.f-input,.f-ta{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:13px 15px;font-family:var(--font-mono);font-size:12px;color:var(--text);outline:none;transition:border-color .2s;resize:vertical;}
+.f-input:focus,.f-ta:focus{border-color:var(--accent);}
+.f-ta{min-height:110px;}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.btn-sub{font-family:var(--font-head);font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:14px 28px;background:var(--accent);color:var(--bg);border:none;border-radius:3px;cursor:pointer;transition:box-shadow .2s,transform .2s;box-shadow:0 0 28px rgba(0,229,255,.25);}
+.btn-sub:hover{transform:translateY(-2px);box-shadow:0 0 48px rgba(0,229,255,.45);}
+.f-success{display:none;text-align:center;padding:28px;color:var(--green);font-size:13px;border:1px solid rgba(16,185,129,.3);background:rgba(16,185,129,.07);border-radius:4px;}
+
+footer{background:var(--bg);border-top:1px solid var(--border);padding:28px 60px;display:flex;justify-content:space-between;align-items:center;}
+.f-copy{font-size:11px;color:var(--muted);}
+.f-links{display:flex;gap:24px;}
+.f-link{font-size:11px;color:var(--muted);text-decoration:none;transition:color .2s;}
+.f-link:hover{color:var(--accent);}
+
+@keyframes fup{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:900px){
+  nav{padding:16px 22px;}
+  .nav-links,.nav-cta{display:none;}
+  section{padding:60px 22px;}
+  #hero{padding:90px 22px 60px;}
+  .hero-name{letter-spacing:-1.5px;}
+  .stats-bar{padding:20px;flex-wrap:wrap;gap:18px;}
+  .about-grid,.edu-grid,.contact-grid{grid-template-columns:1fr;}
+  .f-row{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:14px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curR"></div>
+
+<nav>
+  <div class="nav-logo">HK<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://github.com/harshithkoundinya" target="_blank" class="nav-cta">GitHub ↗</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">Open to Opportunities · Melbourne, AU · Full Work Rights</div>
+    <h1 class="hero-name">Harshith<br><span class="italic">Koundinya</span></h1>
+    <p class="hero-sub">Data Analytics student · Ex Salesforce Admin & DevOps Engineer · Building intelligent systems with Python, ML, NLP & Power BI. Based in Melbourne, Australia.</p>
+    <div class="hero-badges">
+      <span class="badge">Python</span><span class="badge">Machine Learning</span><span class="badge">Power BI</span><span class="badge">NLP</span><span class="badge">Salesforce</span><span class="badge">TensorFlow</span><span class="badge">SQL</span><span class="badge">AWS</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-p">View Projects</a>
+      <a href="#contact" class="btn-o">Get in Touch</a>
+      <a href="https://www.linkedin.com/in/harshith-koundinya-9b49b2212" target="_blank" class="btn-o">LinkedIn ↗</a>
+    </div>
+  </div>
+  <div class="scroll-ind"><div class="s-line"></div>Scroll to explore</div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num" data-t="6">0</div><div class="stat-label">Projects</div></div>
+  <div class="stat-div"></div>
+  <div class="stat"><div class="stat-num" data-t="3">0</div><div class="stat-label">Years Exp</div></div>
+  <div class="stat-div"></div>
+  <div class="stat"><div class="stat-num" data-t="2">0</div><div class="stat-label">Certifications</div></div>
+  <div class="stat-div"></div>
+  <div class="stat"><div class="stat-num" data-t="8">0</div><div class="stat-label">Technologies</div></div>
+</div>
+
+<section id="about">
+  <div class="s-label">Who I am</div>
+  <h2 class="s-title">About <em>Me</em></h2>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>I'm <strong>Harshith Koundinya</strong>, a results-driven data analytics professional currently completing a <strong>Master of Data Analytics (Software Engineering)</strong> at Melbourne Institute of Technology (graduating Oct 2025).</p>
+      <p>My career spans <strong>Salesforce administration, DevOps engineering, and workforce coordination</strong> at Tech Mahindra and HOBAN Recruitment. I've configured enterprise CRM systems, monitored AWS cloud infrastructure, and managed workforce logistics across 150+ locations.</p>
+      <p>I'm passionate about building intelligent systems — from <strong>CNN-based explosive detection models</strong> to <strong>healthcare NLP dashboards</strong> — and translating complex data into clear business insights.</p>
+      <p>Currently holding <strong>Subclass 485 Graduate Visa</strong> with full Australian working rights. Actively seeking data analytics, BI, or ML engineering roles in Melbourne.</p>
+      <div class="about-details">
+        <div class="about-detail"><span class="ic">📍</span> 5 Sussex Ct, Tarneit VIC 3075, Melbourne</div>
+        <div class="about-detail"><span class="ic">📱</span> <a href="tel:+61434135559">+61 434 135 559</a></div>
+        <div class="about-detail"><span class="ic">✉️</span> <a href="mailto:harshithkoundinya@gmail.com">harshithkoundinya@gmail.com</a></div>
+        <div class="about-detail"><span class="ic">🔗</span> <a href="https://www.linkedin.com/in/harshith-koundinya-9b49b2212" target="_blank">linkedin.com/in/harshith-koundinya</a></div>
+        <div class="about-detail"><span class="ic">🐙</span> <a href="https://github.com/harshithkoundinya" target="_blank">github.com/harshithkoundinya</a></div>
+        <div class="about-detail"><span class="ic">🚗</span> Full Victorian Driver's Licence (Valid Nov 2027)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="s-label">What I know</div>
+  <h2 class="s-title">Technical <em>Skills</em></h2>
+  <div class="skills-grid">
+    <div class="skill-card reveal"><div class="skill-icon">📊</div><div class="skill-title">Data Analysis & Visualisation</div><div class="skill-items"><span class="skill-item">Python</span><span class="skill-item">Excel (Advanced)</span><span class="skill-item">Power BI</span><span class="skill-item">Tableau</span><span class="skill-item">Pandas</span><span class="skill-item">NumPy</span></div></div>
+    <div class="skill-card reveal"><div class="skill-icon">🤖</div><div class="skill-title">Machine Learning & AI</div><div class="skill-items"><span class="skill-item">Scikit-learn</span><span class="skill-item">TensorFlow</span><span class="skill-item">CNN</span><span class="skill-item">NLTK</span><span class="skill-item">spaCy</span><span class="skill-item">NLP</span></div></div>
+    <div class="skill-card reveal"><div class="skill-icon">🗄️</div><div class="skill-title">Databases & Cloud</div><div class="skill-items"><span class="skill-item">MySQL</span><span class="skill-item">PostgreSQL</span><span class="skill-item">AWS</span><span class="skill-item">Google Cloud</span><span class="skill-item">Trifacta</span></div></div>
+    <div class="skill-card reveal"><div class="skill-icon">☁️</div><div class="skill-title">Salesforce CRM</div><div class="skill-items"><span class="skill-item">Admin</span><span class="skill-item">Data Loader</span><span class="skill-item">Reports & Dashboards</span><span class="skill-item">Flow Builder</span><span class="skill-item">Change Sets</span></div></div>
+    <div class="skill-card reveal"><div class="skill-icon">⚙️</div><div class="skill-title">DevOps & Engineering</div><div class="skill-items"><span class="skill-item">Jenkins</span><span class="skill-item">GitHub Actions</span><span class="skill-item">CI/CD</span><span class="skill-item">Sandbox Management</span></div></div>
+    <div class="skill-card reveal"><div class="skill-icon">🧠</div><div class="skill-title">Business & Operations</div><div class="skill-items"><span class="skill-item">System Design</span><span class="skill-item">Data Modelling</span><span class="skill-item">Workforce Coordination</span><span class="skill-item">Process Optimisation</span><span class="skill-item">Empire & Deputy</span></div></div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="s-label">What I've built</div>
+  <h2 class="s-title">Key <em>Projects</em></h2>
+  <div class="projects-grid">
+    <div class="proj-card reveal">
+      <div class="proj-num">01</div>
+      <div class="proj-title">AI-Based Explosives Detection System</div>
+      <div class="proj-desc">CNN model for detecting explosives via image classification. Focused on model performance optimisation and accuracy on real-world image data using TensorFlow.</div>
+      <div class="proj-tags"><span class="proj-tag">CNN</span><span class="proj-tag">TensorFlow</span><span class="proj-tag">Image Classification</span><span class="proj-tag">Python</span></div>
+      <div class="proj-links"><a href="https://github.com/harshithkoundinya" target="_blank" class="proj-link">🐙 GitHub →</a></div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-num">02</div>
+      <div class="proj-title">Healthcare Review Analytics Dashboard</div>
+      <div class="proj-desc">Interactive dashboard integrating sentiment analysis, text summarisation & keyword extraction. Analysed user reviews to generate actionable healthcare insights using NLP.</div>
+      <div class="proj-tags"><span class="proj-tag">NLP</span><span class="proj-tag">Power BI</span><span class="proj-tag">Sentiment Analysis</span><span class="proj-tag">Python</span></div>
+      <div class="proj-links"><a href="https://github.com/harshithkoundinya" target="_blank" class="proj-link">🐙 GitHub →</a></div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-num">03</div>
+      <div class="proj-title">Student Management System</div>
+      <div class="proj-desc">Full-stack system for managing student data, course registrations & grades. Built with ER diagrams, UML diagrams, and a three-tier architecture.</div>
+      <div class="proj-tags"><span class="proj-tag">System Design</span><span class="proj-tag">SQL</span><span class="proj-tag">UML</span><span class="proj-tag">3-Tier Arch</span></div>
+      <div class="proj-links"><a href="https://github.com/harshithkoundinya" target="_blank" class="proj-link">🐙 GitHub →</a></div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-num">04</div>
+      <div class="proj-title">Event Registration System</div>
+      <div class="proj-desc">Full event management, ticketing, and attendee tracking system. Applied software design principles and testing methodologies for robust performance.</div>
+      <div class="proj-tags"><span class="proj-tag">Software Design</span><span class="proj-tag">Testing</span><span class="proj-tag">Event Mgmt</span></div>
+      <div class="proj-links"><a href="https://github.com/harshithkoundinya" target="_blank" class="proj-link">🐙 GitHub →</a></div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-num">05</div>
+      <div class="proj-title">Blockchain in Healthcare Research</div>
+      <div class="proj-desc">Data-driven research on blockchain's impact in healthcare data management. Comprehensive literature review and analytical insights on adoption trends.</div>
+      <div class="proj-tags"><span class="proj-tag">Blockchain</span><span class="proj-tag">Research</span><span class="proj-tag">Healthcare Analytics</span></div>
+      <div class="proj-links"><a href="https://github.com/harshithkoundinya" target="_blank" class="proj-link">🐙 GitHub →</a></div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-num">06</div>
+      <div class="proj-title">President — Clique (Team Leadership)</div>
+      <div class="proj-desc">Led a cross-functional team through academic and technical project delivery. Coordinated timelines, task distribution, and collaboration to achieve on-time project outcomes.</div>
+      <div class="proj-tags"><span class="proj-tag">Leadership</span><span class="proj-tag">Project Mgmt</span><span class="proj-tag">Team Coordination</span></div>
+      <div class="proj-links"><a href="https://github.com/harshithkoundinya" target="_blank" class="proj-link">🐙 GitHub →</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="s-label">Where I've worked</div>
+  <h2 class="s-title">Work <em>Experience</em></h2>
+  <div class="timeline reveal">
+    <div class="tl-item">
+      <div class="tl-date">Aug 2024 – Present</div>
+      <div class="tl-role">Workforce Coordinator</div>
+      <div class="tl-company">HOBAN Recruitment · Melbourne, VIC</div>
+      <ul class="tl-pts">
+        <li>Created and maintained job descriptions, management plans, and safety plans for HOBAN staff</li>
+        <li>Managed workforce data and structured documentation across 150+ operational locations</li>
+        <li>Utilised Empire and Deputy for scheduling, time management, and reporting</li>
+        <li>Collaborated with Account Managers to meet client operational requirements and service standards</li>
+        <li>Upheld workplace culture of Integrity, Teamwork, and Excellence aligned with RGF's global values</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Oct 2023 – Mar 2024</div>
+      <div class="tl-role">Salesforce Administrator</div>
+      <div class="tl-company">Tech Mahindra · India</div>
+      <ul class="tl-pts">
+        <li>Configured Salesforce objects, fields, page layouts, and validation rules</li>
+        <li>Managed user creation, permission assignments, and data access control</li>
+        <li>Built and modified reports and dashboards for internal stakeholders</li>
+        <li>Data migration using Data Loader and metadata deployments via Change Sets</li>
+        <li>Documented business processes and translated requirements into Salesforce configurations</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">May 2023 – Oct 2023</div>
+      <div class="tl-role">Junior DevOps Engineer</div>
+      <div class="tl-company">Tech Mahindra · India</div>
+      <ul class="tl-pts">
+        <li>CI/CD pipeline monitoring using Jenkins and GitHub Actions</li>
+        <li>Supported Salesforce deployment activities and sandbox management</li>
+        <li>Monitored AWS-hosted environments for system stability and performance</li>
+        <li>Participated in troubleshooting and release validation processes</li>
+      </ul>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2023 – Present</div>
+      <div class="tl-role">Delivery Operations Coordinator</div>
+      <div class="tl-company">Uber Eats · Melbourne, VIC (Part-time)</div>
+      <ul class="tl-pts">
+        <li>Managed efficient order fulfilment while maintaining high customer satisfaction ratings</li>
+        <li>Optimised delivery routes using GPS and real-time tracking systems</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="s-label">Where I studied</div>
+  <h2 class="s-title">Education & <em>Credentials</em></h2>
+  <div class="edu-grid reveal">
+    <div class="edu-card">
+      <div class="edu-deg">Master of Data Analytics — Software Engineering</div>
+      <div class="edu-sch">Melbourne Institute of Technology · Melbourne, VIC</div>
+      <div class="edu-per">May 2024 – Oct 2025 (In Progress)</div>
+      <ul class="edu-list">
+        <li>Data Analysis & Visualisation</li>
+        <li>Machine Learning & Artificial Intelligence</li>
+        <li>Natural Language Processing (NLP)</li>
+        <li>Cloud Data Preparation & Big Data Tools</li>
+        <li>Business Intelligence & Decision Analytics</li>
+        <li>Blockchain & Healthcare Data Analytics</li>
+        <li>System Design & Analytical Thinking</li>
+      </ul>
+    </div>
+    <div class="edu-card">
+      <div class="edu-deg">Bachelor of Engineering — Computer Science</div>
+      <div class="edu-sch">JNTUH · India</div>
+      <div class="edu-per">2019 – 2023</div>
+      <ul class="edu-list">
+        <li>CGPA: 8.3 / 10 — Distinction</li>
+        <li>Computer Science Engineering</li>
+        <li>Data Structures & Algorithms</li>
+        <li>Database Management Systems</li>
+        <li>Software Engineering Principles</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cert-grid reveal">
+    <div class="cert-badge"><span class="cert-ic">🏆</span><div><div style="font-size:10px;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;">Certified</div>Salesforce Certified Administrator</div></div>
+    <div class="cert-badge"><span class="cert-ic">🤖</span><div><div style="font-size:10px;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;">Certified</div>Salesforce Sales Agentforce Specialist</div></div>
+    <div class="cert-badge"><span class="cert-ic">🌏</span><div><div style="font-size:10px;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;">Language</div>PTE Academic — Score 72 (Proficient)</div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="s-label">Get in touch</div>
+  <h2 class="s-title">Let's <em>Connect</em></h2>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <a class="c-item" href="mailto:harshithkoundinya@gmail.com"><span class="c-icon">✉️</span><div><div class="c-label">Email</div><div class="c-val">harshithkoundinya@gmail.com</div></div></a>
+      <a class="c-item" href="tel:+61434135559"><span class="c-icon">📱</span><div><div class="c-label">Phone</div><div class="c-val">+61 434 135 559</div></div></a>
+      <a class="c-item" href="https://www.linkedin.com/in/harshith-koundinya-9b49b2212" target="_blank"><span class="c-icon">🔗</span><div><div class="c-label">LinkedIn</div><div class="c-val">harshith-koundinya-9b49b2212</div></div></a>
+      <a class="c-item" href="https://github.com/harshithkoundinya" target="_blank"><span class="c-icon">🐙</span><div><div class="c-label">GitHub</div><div class="c-val">harshithkoundinya</div></div></a>
+      <div class="c-item"><span class="c-icon">📍</span><div><div class="c-label">Location</div><div class="c-val">Tarneit VIC 3075, Melbourne, Australia</div></div></div>
+    </div>
+    <div class="contact-form reveal">
+      <div id="cForm">
+        <div class="f-row">
+          <div class="f-group"><label class="f-label">Name</label><input class="f-input" type="text" placeholder="Your name" id="fn"/></div>
+          <div class="f-group"><label class="f-label">Email</label><input class="f-input" type="email" placeholder="your@email.com" id="fe"/></div>
+        </div>
+        <div class="f-group"><label class="f-label">Subject</label><input class="f-input" type="text" placeholder="Job opportunity / Collaboration / Other" id="fs"/></div>
+        <div class="f-group"><label class="f-label">Message</label><textarea class="f-ta" placeholder="Tell me about the opportunity or project..." id="fm"></textarea></div>
+        <button class="btn-sub" onclick="sendMsg()">Send Message →</button>
+      </div>
+      <div class="f-success" id="fOk">✓ Thanks! I'll get back to you within 24 hours.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-copy">© 2025 Harshith Koundinya · Melbourne, Australia</div>
+  <div class="f-links">
+    <a href="mailto:harshithkoundinya@gmail.com" class="f-link">Email</a>
+    <a href="https://www.linkedin.com/in/harshith-koundinya-9b49b2212" class="f-link" target="_blank">LinkedIn</a>
+    <a href="https://github.com/harshithkoundinya" class="f-link" target="_blank">GitHub</a>
+    <a href="#hero" class="f-link">↑ Top</a>
+  </div>
+</footer>
+
+<script>
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function anim(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(anim);})();
+document.querySelectorAll('a,button,.proj-card,.skill-card,.c-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{curR.style.width='56px';curR.style.height='56px';curR.style.opacity='.8';});
+  el.addEventListener('mouseleave',()=>{curR.style.width='36px';curR.style.height='36px';curR.style.opacity='.4';});
+});
+
+document.querySelectorAll('.stat-num[data-t]').forEach(el=>{
+  new IntersectionObserver(([e])=>{
+    if(e.isIntersecting&&!e.target._done){
+      const t=parseInt(el.dataset.t);let c=0;
+      const s=Math.max(1,Math.ceil(t/30));
+      const id=setInterval(()=>{c=Math.min(c+s,t);el.textContent=c+(t>9?'+':'');if(c>=t)clearInterval(id);},40);
+      e.target._done=true;
+    }
+  },{threshold:.5}).observe(el);
+});
+
+const ro=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*70);ro.unobserve(e.target);}});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(r=>ro.observe(r));
+
+const secs=document.querySelectorAll('section[id]');
+const nls=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur=s.id;});
+  nls.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur);});
+});
+
+function sendMsg(){
+  const n=document.getElementById('fn').value;
+  const e=document.getElementById('fe').value;
+  const m=document.getElementById('fm').value;
+  if(!n||!e||!m){alert('Please fill in your name, email, and message.');return;}
+  document.getElementById('cForm').style.display='none';
+  document.getElementById('fOk').style.display='block';
+}
+</script>
+</body>
+</html>
